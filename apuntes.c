@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #define RESET_COLOR    "\x1b[0m"
 #define NEGRO_T        "\x1b[30m"
 #define NEGRO_F        "\x1b[40m"
@@ -19,7 +20,7 @@
 #define BLANCO_T   "\x1b[37m"
 #define BLANCO_F   "\x1b[47m"
 //--------------------------------------------------------- ayuda
-void    ayuda(char *menu)
+int    ayuda(char *menu)
 {
   if (strcmp(menu,"ayuda") == 0)
   {
@@ -35,30 +36,42 @@ void    ayuda(char *menu)
     }
     printf("\n\n           Comandos útiles:\n-------------------------------------\nayuda        comandos        ejemplo\n-------------------------------------\n");
     while (getchar() != '\n');
+    return (0);
+  }
+  else {
+    return (1);
   }
 }
 //--------------------------------------------------------- 1
-void    uno(char *menu)
+int    uno(char *menu)
 {
   if (strcmp(menu, "1") == 0)
   {  
     system("clear");
     printf("\nEl"ROJO_T " Fuzzing " RESET_COLOR "consiste en enviar datos aleatorios, inválidos y no esperados mediante los formularios de entrada de una aplicación buscando alguna vulnerabilidad en ella.\n");
     while (getchar() != '\n');
+    return (0);
+  }
+  else {
+    return (1);
   }
 }
 //--------------------------------------------------------- ejemplo 1
-void    ejemplo1(char *menu)
+int    ejemplo(char *menu)
 {
-  if (strcmp(menu,"ejemplo 1") == 0)
+  if (strcmp(menu,"ejemplo") == 0)
   { 
     system("clear");
     printf("\nwfuzz -c -t 400 --hc=404 -w primer/diccionario -w segundo/diccionario https://10.10.20.4/FUZZ.FUZ2Z\n");
     while (getchar() != '\n');
+    return (0);
+  }
+  else {
+    return (1);
   }
 }
 //--------------------------------------------------------- comandos
-void    comandos(char *menu)
+int    comandos(char *menu)
 {
   if (strcmp(menu,"comandos") == 0)
   {
@@ -71,7 +84,11 @@ void    comandos(char *menu)
       printf(AMARILLO_T "· %s\n" RESET_COLOR, list_comandos[i]);
     }                                                   
     while (getchar() != '\n');
-    }
+    return (0);  
+  }
+  else {
+  return (1);
+  }
 }
 //--------------------------------------------------------- main
 int main(void)
@@ -80,11 +97,18 @@ int main(void)
   printf(NEGRO_T "Bienvenido a mis apuntes, ejecuta <" MAGENTA_T "ayuda" NEGRO_T ">\n"RESET_COLOR);
   //fgets(menu, 20, stdin);
   while(strcmp(menu,"salir") != 0)
-  {
-    scanf("%[^\n]", menu);
+  { 
+    scanf("%[^\n]", menu); 
+    if (ayuda(menu) == 1 && uno(menu) == 1 && ejemplo(menu) == 1 && comandos(menu) == 1)
+    {
+      printf("\nComando no reconocido.\n");
+      while (getchar() != '\n');
+      printf("\nElige: ");
+      scanf("%[^\n]", menu);
+    }
     ayuda(menu);
     uno(menu);
-    ejemplo1(menu);
+    ejemplo(menu);
     comandos(menu);
     if (strcmp(menu, "salir") != 0)
       printf("\nElige: ");
