@@ -35,7 +35,6 @@ int    ayuda(char *menu)
       numero++;
     }
     printf("\n\n           Comandos útiles:\n-------------------------------------\nayuda        comandos        ejemplo\n-------------------------------------\n");
-    while (getchar() != '\n');
     return (0);
   }
   else {
@@ -49,7 +48,6 @@ int    uno(char *menu)
   {  
     system("clear");
     printf("\nEl"ROJO_T " Fuzzing " RESET_COLOR "consiste en enviar datos aleatorios, inválidos y no esperados mediante los formularios de entrada de una aplicación buscando alguna vulnerabilidad en ella.\n");
-    while (getchar() != '\n');
     return (0);
   }
   else {
@@ -63,7 +61,6 @@ int    ejemplo(char *menu)
   { 
     system("clear");
     printf("\nwfuzz -c -t 400 --hc=404 -w primer/diccionario -w segundo/diccionario https://10.10.20.4/FUZZ.FUZ2Z\n");
-    while (getchar() != '\n');
     return (0);
   }
   else {
@@ -83,7 +80,6 @@ int    comandos(char *menu)
     for (size_t i = 0; i < recorrer; i++) {
       printf(AMARILLO_T "· %s\n" RESET_COLOR, list_comandos[i]);
     }                                                   
-    while (getchar() != '\n');
     return (0);  
   }
   else {
@@ -112,6 +108,7 @@ int main(void)
     comandos(menu);
     if (strcmp(menu, "salir") != 0)
       printf("\nElige: ");
+      while (getchar() != '\n');
   }
   return (0);
 }
