@@ -46,22 +46,31 @@ int    uno(char *menu)
 {
   if (strcmp(menu, "1") == 0)
   {  
+    char        *list_colores[]={VERDE_T, AMARILLO_T, AZUL_T, ROJO_T};
+    char        *list_pentest[]={"Fuzzing", "Nmap",  "Ignacio"};
+    int         recorrer = sizeof(list_pentest) / sizeof(char *);
+    int numero = 1;
     system("clear");
-    printf("\nEl"ROJO_T " Fuzzing " RESET_COLOR "consiste en enviar datos aleatorios, inválidos y no esperados mediante los formularios de entrada de una aplicación buscando alguna vulnerabilidad en ella.\n");
-    return (0);
+    for (size_t i = 0; i < recorrer; i++){
+      printf(MAGENTA_T "%i: " "%s" "%s\n" RESET_COLOR, numero, list_colores[i], list_pentest[i]);
+      numero++;
+    }
   }
   else {
     return (1);
   }
 }
-//--------------------------------------------------------- ejemplo 1
+//--------------------------------------------------------- ejemplo
 int    ejemplo(char *menu)
 {
-  if (strcmp(menu,"ejemplo") == 0)
+  if (strstr(menu,"ejemplo"))
   { 
+    if (strstr(menu, "1"))
+    {  
     system("clear");
     printf("\nwfuzz -c -t 400 --hc=404 -w primer/diccionario -w segundo/diccionario https://10.10.20.4/FUZZ.FUZ2Z\n");
     return (0);
+    }  
   }
   else {
     return (1);
@@ -108,7 +117,7 @@ int main(void)
     comandos(menu);
     if (strcmp(menu, "salir") != 0)
       printf("\nElige: ");
-      while (getchar() != '\n');
+    while (getchar() != '\n');
   }
   return (0);
 }
