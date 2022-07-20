@@ -104,7 +104,7 @@ int main(void)
   while(strcmp(menu,"salir") != 0)
   { 
     scanf("%[^\n]", menu); 
-    if (ayuda(menu) == 1 && uno(menu) == 1 && ejemplo(menu) == 1 && comandos(menu) == 1)
+    if (ayuda(menu) == 1 && uno(menu) == 1 && ejemplo(menu) == 1 && comandos(menu) == 1 && strcmp(menu,"salir") != 0)
     {
       printf("\nComando no reconocido.\n");
       while (getchar() != '\n');
